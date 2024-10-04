@@ -4,8 +4,461 @@
 with section("parse"):
 
   # Specify structure for custom cmake functions
-  additional_commands = { 'foo': { 'flags': ['BAR', 'BAZ'],
-             'kwargs': {'DEPENDS': '*', 'HEADERS': '*', 'SOURCES': '*'}}}
+  additional_commands.update({
+     # Core commands
+     'qt_add_big_resources': {
+         'pargs': '1+',
+         'flags': ['OPTIONS'],
+         'kwargs': {}
+     },
+     'qt_add_binary_resources': {
+         'pargs': '2+',
+         'flags': ['DESTINATION', 'OPTIONS'],
+         'kwargs': {}
+     },
+     'qt_add_executable': {
+         'pargs': '1+',
+         'flags': ['WIN32', 'MACOSX_BUNDLE', 'MANUAL_FINALIZATION'],
+         'kwargs': {}
+     },
+     'qt_add_library': {
+         'pargs': '1+',
+         'flags': ['STATIC', 'SHARED', 'MODULE', 'INTERFACE', 'OBJECT', 'MANUAL_FINALIZATION'],
+         'kwargs': {}
+     },
+     'qt_add_plugin': {
+         'pargs': '1+',
+         'flags': ['SHARED', 'STATIC', 'MANUAL_FINALIZATION'],
+         'kwargs': {
+             'CLASS_NAME': 1,
+             'OUTPUT_TARGETS': 1
+         }
+     },
+     'qt_add_resources': {
+         'pargs': '2+',
+         'flags': ['PREFIX', 'LANG', 'BASE', 'BIG_RESOURCES', 'OPTIONS'],
+         'kwargs': {
+             'OUTPUT_TARGETS': 1,
+             'FILES': '*'
+         }
+     },
+     'qt_allow_non_utf8_sources': {
+         'pargs': 1,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_android_add_apk_target': {
+         'pargs': 1,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_android_apply_arch_suffix': {
+         'pargs': 1,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_android_generate_deployment_settings': {
+         'pargs': 1,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_deploy_qt_conf': {
+         'pargs': 1,
+         'flags': [
+             'PREFIX', 'DOC_DIR', 'HEADERS_DIR', 'LIB_DIR', 'LIBEXEC_DIR',
+             'BIN_DIR', 'PLUGINS_DIR', 'QML_DIR', 'ARCHDATA_DIR',
+             'DATA_DIR', 'TRANSLATIONS_DIR', 'EXAMPLES_DIR',
+             'TESTS_DIR', 'SETTINGS_DIR'
+         ],
+         'kwargs': {}
+     },
+     'qt_deploy_runtime_dependencies': {
+         'pargs': 1,
+         'flags': [
+             'ADDITIONAL_EXECUTABLES', 'ADDITIONAL_LIBRARIES', 'ADDITIONAL_MODULES',
+             'GENERATE_QT_CONF', 'BIN_DIR', 'LIBEXEC_DIR', 'LIB_DIR',
+             'PLUGINS_DIR', 'QML_DIR', 'VERBOSE', 'NO_OVERWRITE',
+             'NO_APP_STORE_COMPLIANCE', 'NO_TRANSLATIONS', 'NO_COMPILER_RUNTIME',
+             'DEPLOY_TOOL_OPTIONS', 'PRE_INCLUDE_REGEXES', 'PRE_EXCLUDE_REGEXES',
+             'POST_INCLUDE_REGEXES', 'POST_EXCLUDE_REGEXES', 'POST_INCLUDE_FILES',
+             'POST_EXCLUDE_FILES'
+         ],
+         'kwargs': {}
+     },
+     'qt_deploy_translations': {
+         'pargs': 0,
+         'flags': ['CATALOGS', 'LOCALES', 'LCONVERT', 'VERBOSE'],
+         'kwargs': {}
+     },
+     'qt_disable_unicode_defines': {
+         'pargs': 1,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_extract_metatypes': {
+         'pargs': 1,
+         'flags': ['MANUAL_MOC_JSON_FILES'],
+         'kwargs': {
+             'OUTPUT_FILES': 1
+         }
+     },
+     'qt_finalize_project': {
+         'pargs': 0,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_finalize_target': {
+         'pargs': 1,
+         'flags': [],
+         'kwargs': {}
+     },
+     'qt_generate_deploy_app_script': {
+         'pargs': 1,
+         'flags': [
+             'NO_TRANSLATIONS', 'NO_COMPILER_RUNTIME',
+             'NO_UNSUPPORTED_PLATFORM_ERROR', 'DEPLOY_TOOL_OPTIONS',
+             'PRE_INCLUDE_REGEXES', 'PRE_EXCLUDE_REGEXES',
+             'POST_INCLUDE_REGEXES', 'POST_EXCLUDE_REGEXES',
+             'POST_INCLUDE_FILES', 'POST_EXCLUDE_FILES'
+         ],
+         'kwargs': {
+             'OUTPUT_SCRIPT': 1
+         }
+     },
+     'qt_generate_deploy_script': {
+         'pargs': 0,
+         'flags': [],
+         'kwargs': {
+             'OUTPUT_SCRIPT': 1,
+             'TARGET': 1,
+             'NAME': 1,
+             'CONTENT': 1
+         }
+     },
+     'qt_generate_moc': {
+         'pargs': 2,
+         'flags': [],
+         'kwargs': {
+             'TARGET': 1
+         }
+     },
+     'qt_import_plugins': {
+         'pargs': 1,
+         'flags': [
+             'INCLUDE', 'EXCLUDE', 'INCLUDE_BY_TYPE',
+             'EXCLUDE_BY_TYPE', 'NO_DEFAULT'
+         ],
+         'kwargs': {}
+     },
+     'qt_policy': {
+         'pargs': 0,
+         'flags': ['SET', 'GET'],
+         'kwargs': {}
+     },
+     'qt_set_finalizer_mode': {
+         'pargs': 1,
+         'flags': ['ENABLE', 'DISABLE', 'MODES'],
+         'kwargs': {}
+     },
+     'qt_standard_project_setup': {
+         'pargs': 0,
+         'flags': [
+             'REQUIRES', 'SUPPORTS_UP_TO',
+             'I18N_TRANSLATED_LANGUAGES', 'I18N_SOURCE_LANGUAGE'
+         ],
+         'kwargs': {}
+     },
+     'qt_wrap_cpp': {
+         'pargs': '1+',
+         'flags': ['OPTIONS', 'DEPENDS'],
+         'kwargs': {
+             'TARGET': 1
+         }
+     },
+
+      # Dbus commands
+      'qt_add_dbus_adaptor': {
+          'pargs': 3,
+          'flags': [],
+          'kwargs': {
+              'parent_class': 1,
+              'basename': 1,
+              'classname': 1
+          }
+      },
+      'qt_add_dbus_interface': {
+          'pargs': 2,
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_add_dbus_interfaces': {
+          'pargs': '1+',
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_generate_dbus_interface': {
+          'pargs': 1,
+          'flags': [],
+          'kwargs': {
+              'customName': 1,
+              'OPTIONS': '*'
+          }
+      },
+
+      # InterfaceFramework commands
+      'qt_ifcodegen_add_plugin': {
+          'pargs': 3,
+          'flags': [
+              'ANNOTATION_FILES', 'IDL_IMPORT_PATH', 'OUTPUT_DIR',
+              'EXTRA_HEADERS_OUTPUT_DIR', 'EXTRA_TEMPLATE_SEARCH_PATH',
+              'VERBOSE'
+          ],
+          'kwargs': {}
+      },
+      'qt_ifcodegen_add_qml_module': {
+          'pargs': 3,
+          'flags': [
+              'ANNOTATION_FILES', 'IDL_IMPORT_PATH', 'OUTPUT_DIR',
+              'EXTRA_HEADERS_OUTPUT_DIR', 'EXTRA_TEMPLATE_SEARCH_PATH',
+              'VERBOSE'
+          ],
+          'kwargs': {}
+      },
+      'qt_ifcodegen_extend_target': {
+          'pargs': 3,
+          'flags': [
+              'ANNOTATION_FILES', 'IDL_IMPORT_PATH', 'OUTPUT_DIR',
+              'EXTRA_HEADERS_OUTPUT_DIR', 'EXTRA_TEMPLATE_SEARCH_PATH',
+              'PREFIX', 'VERBOSE', 'NO_GENERATE'
+          ],
+          'kwargs': {}
+      },
+      'qt_ifcodegen_generate': {
+          'pargs': 2,
+          'flags': [
+              'ANNOTATION_FILES', 'IMPORT_PATH', 'OUTPUT_DIR',
+              'EXTRA_HEADERS_OUTPUT_DIR', 'EXTRA_TEMPLATE_SEARCH_PATH',
+              'VERBOSE'
+          ],
+          'kwargs': {}
+      },
+      'qt_ifcodegen_import_variables': {
+          'pargs': 3,
+          'flags': [
+              'ANNOTATION_FILES', 'IDL_IMPORT_PATH', 'OUTPUT_DIR',
+              'EXTRA_HEADERS_OUTPUT_DIR', 'EXTRA_TEMPLATE_SEARCH_PATH',
+              'VERBOSE', 'NO_GENERATE'
+          ],
+          'kwargs': {}
+      },
+      'qt_set_ifcodegen_variable': {
+          'pargs': 2,
+          'flags': [],
+          'kwargs': {}
+      },
+
+      # LinguistTools commands
+      'qt_add_lrelease': {
+          'pargs': '1+',
+          'flags': [
+              'LRELEASE_TARGET', 'EXCLUDE_FROM_ALL',
+              'NO_GLOBAL_TARGET', 'QM_FILES_OUTPUT_VARIABLE', 'OPTIONS'
+          ],
+          'kwargs': {}
+      },
+      'qt_add_lupdate': {
+          'pargs': '1+',
+          'flags': [
+              'PLURALS_TS_FILE', 'SOURCE_TARGETS', 'SOURCES',
+              'INCLUDE_DIRECTORIES', 'LUPDATE_TARGET', 'NO_GLOBAL_TARGET', 'OPTIONS'
+          ],
+          'kwargs': {}
+      },
+      'qt_add_translation': {
+          'pargs': '1+',
+          'flags': ['OPTIONS'],
+          'kwargs': {}
+      },
+      'qt_add_translations': {
+          'pargs': 0,
+          'flags': [
+              'TARGETS', 'SOURCE_TARGETS', 'TS_FILE_BASE',
+              'TS_FILE_DIR', 'TS_FILES', 'PLURALS_TS_FILE',
+              'NO_GENERATE_PLURALS_TS_FILE', 'RESOURCE_PREFIX',
+              'OUTPUT_TARGETS', 'QM_FILES_OUTPUT_VARIABLE', 'SOURCES',
+              'INCLUDE_DIRECTORIES', 'LUPDATE_TARGET', 'LUPDATE_OPTIONS',
+              'LRELEASE_TARGET', 'LRELEASE_OPTIONS', 'IMMEDIATE_CALL'
+          ],
+          'kwargs': {}
+      },
+      'qt_collect_translation_source_targets': {
+          'pargs': 1,
+          'flags': ['DIRECTORY'],
+          'kwargs': {}
+      },
+      'qt_create_translation': {
+          'pargs': '1+',
+          'flags': ['OPTIONS'],
+          'kwargs': {}
+      },
+
+      # Protobuf commands
+      'qt_add_protobuf': {
+          'pargs': 1,
+          'flags': [
+              'PROTO_FILES', 'COPY_COMMENTS', 'GENERATE_PACKAGE_SUBFOLDERS',
+              'EXTRA_NAMESPACE', 'EXPORT_MACRO', 'QML',
+              'PROTO_INCLUDES', 'OUTPUT_DIRECTORY', 'OUTPUT_HEADERS', 'OUTPUT_TARGETS'
+          ],
+          'kwargs': {}
+      },
+
+      # Grpc commands
+      'qt_add_grpc': {
+          'pargs': 2,
+          'flags': [
+              'PROTO_FILES', 'COPY_COMMENTS', 'GENERATE_PACKAGE_SUBFOLDERS',
+              'QML', 'EXTRA_NAMESPACE', 'EXPORT_MACRO',
+              'PROTO_INCLUDES', 'OUTPUT_DIRECTORY', 'OUTPUT_HEADERS', 'OUTPUT_TARGETS'
+          ],
+          'kwargs': {}
+      },
+
+      # Scxml commands
+      'qt6_add_statecharts': {
+          'pargs': 1,
+          'flags': ['OPTIONS'],
+          'kwargs': {}
+      },
+
+      # Widgets commands
+      'qt_wrap_ui': {
+          'pargs': '1+',
+          'flags': ['OPTIONS'],
+          'kwargs': {}
+      },
+
+      # WebEngineCore commands
+      'qt_add_webengine_dictionary': {
+          'pargs': 0,
+          'flags': ['TARGET', 'SOURCE', 'OUTPUT_DIRECTORY'],
+          'kwargs': {}
+      },
+
+      # RemoteObjects commands
+      'qt_add_repc_merged': {
+          'pargs': 1,
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_add_repc_replicas': {
+          'pargs': 1,
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_add_repc_sources': {
+          'pargs': 1,
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_reps_from_headers': {
+          'pargs': 1,
+          'flags': [],
+          'kwargs': {}
+      },
+
+      # Qml commands
+      'qt_add_qml_module': {
+          'pargs': 2,
+          'flags': [
+              'VERSION', 'PAST_MAJOR_VERSIONS', 'STATIC',
+              'SHARED', 'PLUGIN_TARGET', 'OUTPUT_DIRECTORY',
+              'RESOURCE_PREFIX', 'CLASS_NAME', 'TYPEINFO',
+              'IMPORTS', 'OPTIONAL_IMPORTS', 'DEFAULT_IMPORTS',
+              'DEPENDENCIES', 'IMPORT_PATH', 'SOURCES',
+              'QML_FILES', 'RESOURCES', 'OUTPUT_TARGETS',
+              'DESIGNER_SUPPORTED', 'FOLLOW_FOREIGN_VERSIONING',
+              'NAMESPACE', 'NO_PLUGIN', 'NO_PLUGIN_OPTIONAL',
+              'NO_CREATE_PLUGIN_TARGET', 'NO_GENERATE_PLUGIN_SOURCE',
+              'NO_GENERATE_QMLTYPES', 'NO_GENERATE_QMLDIR',
+              'NO_LINT', 'NO_CACHEGEN', 'NO_RESOURCE_TARGET_PATH',
+              'NO_IMPORT_SCAN', 'ENABLE_TYPE_COMPILER',
+              'TYPE_COMPILER_NAMESPACE', 'QMLTC_EXPORT_DIRECTIVE',
+              'QMLTC_EXPORT_FILE_NAME'
+          ],
+          'kwargs': {}
+      },
+      'qt_add_qml_plugin': {
+          'pargs': 1,
+          'flags': [
+              'BACKING_TARGET', 'STATIC', 'SHARED',
+              'OUTPUT_DIRECTORY', 'URI', 'CLASS_NAME',
+              'NO_GENERATE_PLUGIN_SOURCE', 'NAMESPACE'
+          ],
+          'kwargs': {}
+      },
+      'qt_deploy_qml_imports': {
+          'pargs': 1,
+          'flags': ['QML_DIR', 'PLUGINS_FOUND', 'NO_QT_IMPORTS'],
+          'kwargs': {}
+      },
+      'qt_generate_deploy_qml_app_script': {
+          'pargs': 1,
+          'flags': [
+              'NO_UNSUPPORTED_PLATFORM_ERROR', 'NO_TRANSLATIONS',
+              'NO_COMPILER_RUNTIME', 'DEPLOY_TOOL_OPTIONS',
+              'DEPLOY_USER_QML_MODULES_ON_UNSUPPORTED_PLATFORM',
+              'MACOS_BUNDLE_POST_BUILD', 'PRE_INCLUDE_REGEXES',
+              'PRE_EXCLUDE_REGEXES', 'POST_INCLUDE_REGEXES',
+              'POST_EXCLUDE_REGEXES', 'POST_INCLUDE_FILES',
+              'POST_EXCLUDE_FILES'
+          ],
+          'kwargs': {
+              'OUTPUT_SCRIPT': 1
+          }
+      },
+      'qt_generate_foreign_qml_types': {
+          'pargs': 2,
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_import_qml_plugins': {
+          'pargs': 1,
+          'flags': [],
+          'kwargs': {}
+      },
+      'qt_query_qml_module': {
+          'pargs': 1,
+          'flags': [
+              'URI', 'VERSION', 'PLUGIN_TARGET',
+              'TARGET_PATH', 'MODULE_RESOURCE_PATH',
+              'QMLDIR', 'TYPEINFO', 'QML_FILES',
+              'QML_FILES_DEPLOY_PATHS', 'QML_FILES_PREFIX_OVERRIDES',
+              'RESOURCES', 'RESOURCES_DEPLOY_PATHS',
+              'RESOURCES_PREFIX_OVERRIDES'
+          ],
+          'kwargs': {}
+      },
+      'qt_target_qml_sources': {
+          'pargs': 1,
+          'flags': [
+              'QML_FILES', 'RESOURCES', 'PREFIX',
+              'OUTPUT_TARGETS', 'NO_LINT', 'NO_CACHEGEN',
+              'NO_QMLDIR_TYPES'
+          ],
+          'kwargs': {}
+      },
+
+      # ShaderTools commands
+      'qt6_add_shaders': {
+          'pargs': 1,
+          'flags': [
+              'PREFIX', 'NOHLSL', 'GLSL',
+              'TESSELLATION_VERTEX_COUNT', 'TESSELLATION_MODE', 'FILES'
+          ],
+          'kwargs': {}
+      }
+  })
 
   # Override configurations per-command where available
   override_spec = {}
