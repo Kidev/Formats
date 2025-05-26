@@ -11,13 +11,15 @@ with section("parse"):
         'qt_add_library': {'pargs': '1+', 'flags': ['STATIC', 'SHARED', 'MODULE', 'INTERFACE', 'OBJECT', 'MANUAL_FINALIZATION'], 'kwargs': {}},
         'qt_add_plugin': {'pargs': '1+', 'flags': ['SHARED', 'STATIC', 'MANUAL_FINALIZATION'], 'kwargs': {'CLASS_NAME': 1, 'OUTPUT_TARGETS': 1}},
         'qt_add_resources': {'pargs': '2+', 'flags': ['PREFIX', 'LANG', 'BASE', 'BIG_RESOURCES'], 'kwargs': {'OUTPUT_TARGETS': 1}},
-        'qt_add_qml_module': {'pargs': '2+', 'flags': ['STATIC', 'SHARED', 'NO_PLUGIN', 'NO_CACHEGEN', 'NO_LINT', 'NO_RESOURCE_TARGET_PATH'], 'kwargs': {'URI': 1, 'VERSION': 1, 'CLASS_NAME': 1, 'QML_FILES': '*', 'RESOURCES': '*', 'RESOURCE_PREFIX': 1, 'IMPORTS': '*', 'PLUGIN_TARGET': 1, 'DEPENDENCIES': '*', 'PAST_MAJOR_VERSIONS': 1, 'SOURCES': '*', 'RESOURCES': '*', 'DEFINES': '*', 'LIBRARIES': '*', 'PUBLIC_LIBRARIES': '*'}},
-        'qt_generate_deploy_qml_app_script': {'pargs': '1+', 'flags': ['NO_UNSUPPORTED_PLATFORM_ERROR', 'NO_TRANSLATIONS', 'MACOS_BUNDLE_POST_BUILD'], 'kwargs': {'OUTPUT_SCRIPT': 1}},
+        'qt_add_qml_module': {'pargs': '2+', 'flags': ['STATIC', 'SHARED', 'NO_PLUGIN', 'NO_CACHEGEN', 'NO_LINT', 'NO_RESOURCE_TARGET_PATH'], 'kwargs': {'URI': 1, 'VERSION': 1, 'CLASS_NAME': 1, 'QML_FILES': '*', 'RESOURCES': '*', 'RESOURCE_PREFIX': 1, 'IMPORTS': '*', 'IMPORT_PATH': '*', 'PLUGIN_TARGET': 1, 'DEPENDENCIES': '*', 'PAST_MAJOR_VERSIONS': 1, 'SOURCES': '*', 'RESOURCES': '*', 'DEFINES': '*', 'LIBRARIES': '*', 'PUBLIC_LIBRARIES': '*', 'OUTPUT_DIRECTORY': 1}},
+        'qt_add_shaders': {'pargs': '2+', 'flags': ['PRECOMPILE', 'OPTIMIZED', 'BATCHABLE'], 'kwargs': {'PREFIX': 1, 'FILES': '*', 'GLSL': 1, 'HLSL': 1, 'MSL': 1}},
+        'qt_generate_deploy_qml_app_script': {'pargs': '1+', 'flags': ['NO_UNSUPPORTED_PLATFORM_ERROR', 'NO_TRANSLATIONS', 'MACOS_BUNDLE_POST_BUILD', 'DEPLOY_USER_QML_MODULES_ON_UNSUPPORTED_PLATFORM'], 'kwargs': {'OUTPUT_SCRIPT': 1}},
         'qt_generate_deploy_script': {'pargs': '1+', 'flags': [], 'kwargs': {'OUTPUT_SCRIPT': 1, 'TARGET': 1, 'NAME': 1}},
         'qt_set_finalizer_mode': {'pargs': '2+', 'flags': [], 'kwargs': {}},
         'qt_finalize_target': {'pargs': '1+', 'flags': [], 'kwargs': {}},
         'qt_wrap_cpp': {'pargs': '1+', 'flags': [], 'kwargs': {'TARGET': 1, 'OPTIONS': '*', 'DEPENDS': '*'}},
         'qt_deploy_qml_imports': {'pargs': '1+', 'flags': [], 'kwargs': {'TARGET': 1, 'QML_DIR': 1}},
+        'qt_policy': {'kwargs': {'SET': 2, 'GET': 2}}
     }
     additional_commands['qt_internal_add_qml_module'] = additional_commands['qt_add_qml_module']
 
@@ -53,7 +55,7 @@ with section("format"):
 
     # If a cmdline positional group consumes more than this many lines without
     # nesting, then invalidate the layout (and nest)
-    max_rows_cmdline = 1
+    max_rows_cmdline = 80
 
     # Separate flow control names from their parentheses with a space
     separate_ctrl_name_with_space = True
